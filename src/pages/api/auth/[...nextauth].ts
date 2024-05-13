@@ -14,7 +14,8 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile, credentials }) {
+      const {email} = user;
 
       try {
         await fauna.query(
