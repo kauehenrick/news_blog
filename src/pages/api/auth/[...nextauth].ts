@@ -13,13 +13,18 @@ export const authOptions = {
       
     }),
   ],
-  /*callbacks: {
-    async signIn({ user, account, profile, credentials }) {
+  callbacks: {
+    async signIn({ user, account, profile }) {
       const {email} = user;
 
       try {
         await fauna.query(
-          q.If(
+          q.Create(
+            q.Collection('users'),
+            { data: { email } }
+          )
+        ) 
+          /*q.If(
             q.Not(
               q.Exists(
                 q.Match(
@@ -37,13 +42,13 @@ export const authOptions = {
                 q.Casefold(user.email)
               )
           )
-        )
+        )*/
 
         return true;
       } catch {
         return false;
       }
     },
-  }*/
+  }
 }
 export default NextAuth(authOptions)

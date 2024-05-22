@@ -11,7 +11,6 @@
   "dependencies": {
     "@stripe/stripe-js": "^3.4.0",
     "axios": "^1.6.8",
-    "faunadb": "^4.8.0",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
     "react": "^18",
@@ -24,6 +23,7 @@
     "@types/next-auth": "^3.15.0",
     "@types/node": "^20.12.8",
     "@types/react": "^18.3.1",
+    "faunadb": "^4.8.0",
     "typescript": "^5.4.5"
   }
 }
