@@ -13,7 +13,7 @@ export const authOptions = {
       
     }),
   ],
-  callbacks: {
+  /*callbacks: {
     async signIn({ user, account, profile, credentials }) {
       const {email} = user;
 
@@ -44,6 +44,6 @@ export const authOptions = {
         return false;
       }
     },
-  }
+  }*/
 }
 export default NextAuth(authOptions)
