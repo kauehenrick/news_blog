@@ -10,8 +10,8 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-
-      /*authorization: {
+      /*
+      authorization: {
         params: {
             scope: 'read-user',
         }
@@ -29,7 +29,7 @@ export const authOptions = {
             { data: { email } }
           )
         )
-        /*q.If(
+        q.If(
           q.Not(
             q.Exists(
               q.Match(
@@ -47,7 +47,6 @@ export const authOptions = {
               q.Casefold(user.email)
             )
         )
-      )*/
 
         return true;
       } catch {
