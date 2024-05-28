@@ -10,7 +10,7 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      
+
       /*authorization: {
         params: {
             scope: 'read-user',
@@ -20,7 +20,7 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      const {email} = user;
+      const { email } = user;
 
       try {
         await fauna.query(
@@ -28,26 +28,26 @@ export const authOptions = {
             q.Collection('users'),
             { data: { email } }
           )
-        ) 
-          /*q.If(
-            q.Not(
-              q.Exists(
-                q.Match(
-                  q.Index('user_by_email'),
-                  q.Casefold(user.email)
-                )
-              )
-            ),
-              q.Create(
-                q.Collection('users'),
-                { data: { email } }
-              ),
-              q.Get(
+        )
+        /*q.If(
+          q.Not(
+            q.Exists(
+              q.Match(
                 q.Index('user_by_email'),
                 q.Casefold(user.email)
               )
-          )
-        )*/
+            )
+          ),
+            q.Create(
+              q.Collection('users'),
+              { data: { email } }
+            ),
+            q.Get(
+              q.Index('user_by_email'),
+              q.Casefold(user.email)
+            )
+        )
+      )*/
 
         return true;
       } catch {
