@@ -20,7 +20,7 @@
         margin-left: 5rem;
         height: 5rem;
 
-        a {
+        p {
             display: inline-block;
             position: relative;
             padding: 0 0.5rem;
@@ -30,7 +30,7 @@
 
             transition: color 0.2s;
 
-            &+a {
+            &+p {
                 margin-left: 2rem;
             }
 
