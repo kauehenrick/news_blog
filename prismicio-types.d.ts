@@ -4,12 +4,45 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type PostsDocumentDataSlicesSlice = CallToActionSlice;
+type PostsDocumentDataSlicesSlice = never;
 
 /**
  * Content for Posts documents
  */
 interface PostsDocumentData {
+  /**
+   * title field in *Posts*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: posts.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * image field in *Posts*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: posts.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * content field in *Posts*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: posts.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+
   /**
    * Slice Zone field in *Posts*
    *
@@ -19,38 +52,7 @@ interface PostsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<PostsDocumentDataSlicesSlice> /**
-   * Meta Description field in *Posts*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: posts.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Posts*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: posts.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Meta Title field in *Posts*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: posts.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
+  slices: prismic.SliceZone<PostsDocumentDataSlicesSlice>;
 }
 
 /**
@@ -65,50 +67,7 @@ interface PostsDocumentData {
 export type PostsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PostsDocumentData>, "posts", Lang>;
 
-/**
- * Content for Publication documents
- */
-interface PublicationDocumentData {
-  /**
-   * Title field in *Publication*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: *None*
-   * - **API ID Path**: publication.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  title: prismic.TitleField;
-
-  /**
-   * Content field in *Publication*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: publication.content
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  content: prismic.RichTextField;
-}
-
-/**
- * Publication document from Prismic
- *
- * - **API ID**: `publication`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type PublicationDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<PublicationDocumentData>,
-    "publication",
-    Lang
-  >;
-
-export type AllDocumentTypes = PostsDocument | PublicationDocument;
+export type AllDocumentTypes = PostsDocument;
 
 /**
  * Primary content in *CallToAction → Default → Primary*
@@ -248,8 +207,6 @@ declare module "@prismicio/client" {
       PostsDocument,
       PostsDocumentData,
       PostsDocumentDataSlicesSlice,
-      PublicationDocument,
-      PublicationDocumentData,
       AllDocumentTypes,
       CallToActionSlice,
       CallToActionSliceDefaultPrimary,
