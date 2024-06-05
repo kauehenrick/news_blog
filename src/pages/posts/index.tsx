@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import styles from './styles.module.scss'
-import { createClient } from "@/prismicio";
+import { createClient, repositoryName } from "@/prismicio";
 import { GetStaticProps } from 'next';
+import { RichText } from 'prismic-dom';
+import { contentRelationship } from '@prismicio/helpers/dist/isFilled';
 
 export default function Posts() {
     return (
@@ -25,9 +27,23 @@ export default function Posts() {
 export const getStaticProps: GetStaticProps = async () => {
     const prismicClient = createClient();
 
-	const posts = await prismicClient.getAllByType("posts")
+	const response = await prismicClient.getAllByType("posts")
 
-    console.log(JSON.stringify(posts, null, 2))
+    const posts = response.map(post => {
+        console.log(post.data.content.map(e => {
+            console.log(e?.text)
+        }))
+
+        /*console.log(post.data.content.map(e => {
+            console.log(e?.text)
+        }))*/
+
+        return {
+            slug: post.uid,
+            title: RichText.asText(post.data.title),
+            /*excerpt: post.data.content.map*/
+        }
+    })
 
     return {
         props: {}
